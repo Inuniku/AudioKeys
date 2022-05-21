@@ -25,8 +25,6 @@ AudioKeys.prototype.set = state.set;
 AudioKeys.prototype.get = state.get;
 
 // events
-AudioKeys.prototype._handleUp = events._handleUp;
-AudioKeys.prototype._handleDown = events._handleDown;
 AudioKeys.prototype.down = events.down;
 AudioKeys.prototype.up = events.up;
 AudioKeys.prototype._trigger = events._trigger;

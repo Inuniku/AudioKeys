@@ -54,6 +54,13 @@ module.exports = {
     var self = this;
 
     if(typeof window !== 'undefined' && window.document) {
+      self._handleUp = (e) => {
+        self._addKey(e);
+      };
+    
+      self._handleDown = (e) =>{
+        self._removeKey(e);
+      };
       window.document.addEventListener('keydown', self._handleDown);
       window.document.addEventListener('keyup', self._handleUp);
 

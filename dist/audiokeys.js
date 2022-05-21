@@ -222,6 +222,13 @@ module.exports = {
     var self = this;
 
     if(typeof window !== 'undefined' && window.document) {
+      self._handleUp = (e) => {
+        self._addKey(e);
+      };
+    
+      self._handleDown = (e) =>{
+        self._removeKey(e);
+      };
       window.document.addEventListener('keydown', self._handleDown);
       window.document.addEventListener('keyup', self._handleUp);
 
@@ -276,8 +283,6 @@ AudioKeys.prototype.set = state.set;
 AudioKeys.prototype.get = state.get;
 
 // events
-AudioKeys.prototype._handleUp = events._handleUp;
-AudioKeys.prototype._handleDown = events._handleDown;
 AudioKeys.prototype.down = events.down;
 AudioKeys.prototype.up = events.up;
 AudioKeys.prototype._trigger = events._trigger;
