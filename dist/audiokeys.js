@@ -176,10 +176,12 @@ module.exports = {
 
 module.exports = {
   _handleDown: function(e) {
+    var self = this;
     self._addKey(e);
   },
 
   _handleUp: function(e) {
+    var self = this;
     self._removeKey(e);
   },
 
