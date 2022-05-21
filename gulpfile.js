@@ -38,4 +38,4 @@ gulp.task('minify', function() {
   ;
 });
 
-gulp.task('default', ['build', 'minify']);
+gulp.task('default', () => ['build', 'minify']);

@@ -175,11 +175,11 @@ module.exports = {
 // an event for the user.
 
 module.exports = {
-  handleDown: function(e) {
+  _handleDown: function(e) {
     self._addKey(e);
   },
 
-  handleUp: function(e) {
+  _handleUp: function(e) {
     self._removeKey(e);
   },
 
@@ -274,6 +274,8 @@ AudioKeys.prototype.set = state.set;
 AudioKeys.prototype.get = state.get;
 
 // events
+AudioKeys.prototype._handleUp = events._handleUp;
+AudioKeys.prototype._handleDown = events._handleDown;
 AudioKeys.prototype.down = events.down;
 AudioKeys.prototype.up = events.up;
 AudioKeys.prototype._trigger = events._trigger;

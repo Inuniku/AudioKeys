@@ -7,11 +7,11 @@
 // an event for the user.
 
 module.exports = {
-  handleDown: function(e) {
+  _handleDown: function(e) {
     self._addKey(e);
   },
 
-  handleUp: function(e) {
+  _handleUp: function(e) {
     self._removeKey(e);
   },
 
