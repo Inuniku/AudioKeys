@@ -7,6 +7,14 @@
 // an event for the user.
 
 module.exports = {
+  handleDown: function(e) {
+    self._addKey(e);
+  },
+
+  handleUp: function(e) {
+    self._removeKey(e);
+  },
+
   down: function(fn) {
     var self = this;
 
@@ -44,15 +52,11 @@ module.exports = {
     var self = this;
 
     if(typeof window !== 'undefined' && window.document) {
-      window.document.addEventListener('keydown', function(e) {
-        self._addKey(e);
-      });
-      window.document.addEventListener('keyup', function(e) {
-        self._removeKey(e);
-      });
+      window.document.addEventListener('keydown', self.handleDown);
+      window.document.addEventListener('keyup', self.handleUp);
 
       var lastFocus = true;
-      setInterval( function() {
+      self._interval = setInterval( function() {
         if(window.document.hasFocus() === lastFocus) {
           return;
         }
@@ -63,5 +67,13 @@ module.exports = {
       }, 100);
     }
   },
+  _unbind: function() {
+    var self = this;
 
+    if(typeof window !== 'undefined' && window.document) {
+      window.document.removeEventListener('keydown', self.handleDown);
+      window.document.addEventListener('keyup', self.handleUp);
+      clearInterval(self._interval);
+    }
+  }
 };

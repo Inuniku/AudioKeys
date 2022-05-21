@@ -17,15 +17,15 @@ module.exports = {
     var self = this;
     // if the keyCode is one that can be mapped and isn't
     // already pressed, add it to the key object.
-    if(self._isNote(e.keyCode) && !self._isPressed(e.keyCode)) {
+    if(self._isNote(e.code) && !self._isPressed(e.code)) {
       var newKey = self._makeNote(e.keyCode);
       // add the newKey to the list of keys
       self._state.keys = (self._state.keys || []).concat(newKey);
       // reevaluate the active notes based on our priority rules.
       // give it the new note to use if there is an event to trigger.
       self._update();
-    } else if(self._isSpecialKey(e.keyCode)) {
-      self._specialKey(e.keyCode);
+    } else if(self._isSpecialKey(e.code)) {
+      self._specialKey(e.code);
     }
   },
 
@@ -175,6 +175,14 @@ module.exports = {
 // an event for the user.
 
 module.exports = {
+  handleDown: function(e) {
+    self._addKey(e);
+  },
+
+  handleUp: function(e) {
+    self._removeKey(e);
+  },
+
   down: function(fn) {
     var self = this;
 
@@ -212,15 +220,11 @@ module.exports = {
     var self = this;
 
     if(typeof window !== 'undefined' && window.document) {
-      window.document.addEventListener('keydown', function(e) {
-        self._addKey(e);
-      });
-      window.document.addEventListener('keyup', function(e) {
-        self._removeKey(e);
-      });
+      window.document.addEventListener('keydown', self.handleDown);
+      window.document.addEventListener('keyup', self.handleUp);
 
       var lastFocus = true;
-      setInterval( function() {
+      self._interval = setInterval( function() {
         if(window.document.hasFocus() === lastFocus) {
           return;
         }
@@ -231,7 +235,15 @@ module.exports = {
       }, 100);
     }
   },
+  _unbind: function() {
+    var self = this;
 
+    if(typeof window !== 'undefined' && window.document) {
+      window.document.removeEventListener('keydown', self.handleDown);
+      window.document.addEventListener('keyup', self.handleUp);
+      clearInterval(self._interval);
+    }
+  }
 };
 
 },{}],3:[function(require,module,exports){
@@ -253,9 +265,6 @@ function AudioKeys(options) {
   // all listeners are stored in arrays in their respective properties.
   // e.g. self._listeners.down = [fn1, fn2, ... ]
   self._listeners = {};
-
-  // bind DOM events
-  self._bind();
 }
 
 // state
@@ -268,7 +277,8 @@ AudioKeys.prototype.get = state.get;
 AudioKeys.prototype.down = events.down;
 AudioKeys.prototype.up = events.up;
 AudioKeys.prototype._trigger = events._trigger;
-AudioKeys.prototype._bind = events._bind;
+AudioKeys.prototype.bind = events._bind;
+AudioKeys.prototype.unbind = events._unbind;
 
 // mapping
 AudioKeys.prototype._map = mapping._map;

@@ -16,9 +16,6 @@ function AudioKeys(options) {
   // all listeners are stored in arrays in their respective properties.
   // e.g. self._listeners.down = [fn1, fn2, ... ]
   self._listeners = {};
-
-  // bind DOM events
-  self._bind();
 }
 
 // state
@@ -31,7 +28,8 @@ AudioKeys.prototype.get = state.get;
 AudioKeys.prototype.down = events.down;
 AudioKeys.prototype.up = events.up;
 AudioKeys.prototype._trigger = events._trigger;
-AudioKeys.prototype._bind = events._bind;
+AudioKeys.prototype.bind = events._bind;
+AudioKeys.prototype.unbind = events._unbind;
 
 // mapping
 AudioKeys.prototype._map = mapping._map;
