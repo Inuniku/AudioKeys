@@ -50,6 +50,8 @@ Now you will have the `AudioKeys(options)` function available to use.
 ```javascript
 // create a keyboard
 var keyboard = new AudioKeys();
+keyboard.bind(); // This is important. You will recieve no events otherwise.
+
 
 keyboard.down( function(note) {
   // do things with the note object
@@ -58,6 +60,11 @@ keyboard.down( function(note) {
 keyboard.up( function(note) {
   // do things with the note object
 });
+
+...
+
+keyboard.unbind(); // when you are done using this objects
+
 ```
 
 ##### The note object has cool stuff in it.
