@@ -16,15 +16,15 @@ module.exports = {
     var self = this;
     // if the keyCode is one that can be mapped and isn't
     // already pressed, add it to the key object.
-    if(self._isNote(e.code) && !self._isPressed(e.code)) {
+    if(self._isNote(e.keyCode) && !self._isPressed(e.keyCode)) {
       var newKey = self._makeNote(e.keyCode);
       // add the newKey to the list of keys
       self._state.keys = (self._state.keys || []).concat(newKey);
       // reevaluate the active notes based on our priority rules.
       // give it the new note to use if there is an event to trigger.
       self._update();
-    } else if(self._isSpecialKey(e.code)) {
-      self._specialKey(e.code);
+    } else if(self._isSpecialKey(e.keyCode)) {
+      self._specialKey(e.keyCode);
     }
   },
 
