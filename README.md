@@ -50,6 +50,9 @@ Now you will have the `AudioKeys(options)` function available to use.
 ```javascript
 // create a keyboard
 var keyboard = new AudioKeys();
+
+...
+
 keyboard.bind(); // This is important. You will recieve no events otherwise.
 
 
