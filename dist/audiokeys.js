@@ -220,8 +220,8 @@ module.exports = {
     var self = this;
 
     if(typeof window !== 'undefined' && window.document) {
-      window.document.addEventListener('keydown', self.handleDown);
-      window.document.addEventListener('keyup', self.handleUp);
+      window.document.addEventListener('keydown', self._handleDown);
+      window.document.addEventListener('keyup', self._handleUp);
 
       var lastFocus = true;
       self._interval = setInterval( function() {
