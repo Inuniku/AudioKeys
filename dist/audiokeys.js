@@ -175,16 +175,6 @@ module.exports = {
 // an event for the user.
 
 module.exports = {
-  _handleDown: function(e) {
-    var self = this;
-    self._addKey(e);
-  },
-
-  _handleUp: function(e) {
-    var self = this;
-    self._removeKey(e);
-  },
-
   down: function(fn) {
     var self = this;
 
@@ -248,8 +238,8 @@ module.exports = {
     var self = this;
 
     if(typeof window !== 'undefined' && window.document) {
-      window.document.removeEventListener('keydown', self.handleDown);
-      window.document.addEventListener('keyup', self.handleUp);
+      window.document.removeEventListener('keydown', self._handleDown);
+      window.document.addEventListener('keyup', self._handleUp);
       clearInterval(self._interval);
     }
   }
