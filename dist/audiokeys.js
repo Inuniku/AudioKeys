@@ -212,11 +212,11 @@ module.exports = {
     var self = this;
 
     if(typeof window !== 'undefined' && window.document) {
-      self._handleUp = (e) => {
+      self._handleDown = (e) => {
         self._addKey(e);
       };
     
-      self._handleDown = (e) =>{
+      self._handleUp = (e) =>{
         self._removeKey(e);
       };
       window.document.addEventListener('keydown', self._handleDown);
